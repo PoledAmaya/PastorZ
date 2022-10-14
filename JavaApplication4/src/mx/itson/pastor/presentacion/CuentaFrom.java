@@ -4,21 +4,27 @@
  */
 package mx.itson.pastor.presentacion;
 
+
 import javax.swing.JOptionPane;
-import mx.itson.pastor.negocio.ClienteNegocio;
+import mx.itson.pastor.negocio.CuentaNegocio;
+import mx.itson.pastor.persistencia.CuentaDAO;
+
 
 /**
  *
  * @author pyatq
  */
-public class ClienteFrom extends javax.swing.JFrame {
-
+public class CuentaFrom extends javax.swing.JFrame {
+    
+  
     /**
-     * Creates new form ClienteFrom
+     * Creates new form CuentaFrom
      */
-    public ClienteFrom() {
+    public CuentaFrom() {
+       
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -31,24 +37,20 @@ public class ClienteFrom extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtDireccion = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtTelefono = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtGmail = new javax.swing.JTextField();
+        txtNumero = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtGmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nombre:");
+        jLabel1.setText("Numero de Cuenta:");
 
-        jLabel2.setText("Direccion:");
-
-        jLabel3.setText("Telefono:");
-
-        jLabel4.setText("Gmail:");
+        txtNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -57,73 +59,87 @@ public class ClienteFrom extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Gmail:");
+
+        txtGmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                            .addComponent(txtDireccion)
-                            .addComponent(txtTelefono)
-                            .addComponent(txtGmail)))
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
+                .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(263, Short.MAX_VALUE)
-                .addComponent(btnGuardar)
-                .addGap(52, 52, 52))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(txtGmail))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(241, Short.MAX_VALUE)
+                        .addComponent(btnGuardar)))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtGmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(btnGuardar)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
+        
+        //String Numero_de_Cuenta = txtNumero.getText();
+                
+    }//GEN-LAST:event_txtNumeroActionPerformed
+
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String nombre = txtNombre.getText();
-        String direccion = txtDireccion.getText();
-        String telefono = txtTelefono.getText();
+        String numero = txtNumero.getText();
         String gmail = txtGmail.getText();
         
-      if (ClienteNegocio.guardar(nombre, direccion, telefono, gmail)){
-          //MOSTRAR MENSAJE QUE SE GUARDO
-          JOptionPane.showMessageDialog(this, "Este registro se guardo correctamente", "Resgistro guardado", JOptionPane.INFORMATION_MESSAGE);
-          
-      } else{
-          // MOSTRAR MENSAJE QUE NO SE GUARDO
-           JOptionPane.showMessageDialog(this, "No es posible registrar el cliente. Ya existe el correo registrado", "Resgistro no guardado", JOptionPane.ERROR_MESSAGE);
-      }     
-      
+        int id = 0 ;
+        
+        if (CuentaDAO.validar(gmail).getId() != 0) {
+            
+            id = CuentaDAO.validar(gmail).getCliente().getId();
+         
+            CuentaNegocio.guardar(numero, id);
+            JOptionPane.showMessageDialog(this, "La cuanta fue guardada con exito ", "Registro de guardado", JOptionPane.INFORMATION_MESSAGE);
+            
+        }else{
+        
+            JOptionPane.showMessageDialog(this, "El correo no esta registrado", "Registro de guardado", JOptionPane.ERROR_MESSAGE);
+        
+        } 
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtGmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGmailActionPerformed
+       
+    }//GEN-LAST:event_txtGmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,20 +158,20 @@ public class ClienteFrom extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClienteFrom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuentaFrom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClienteFrom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuentaFrom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClienteFrom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuentaFrom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClienteFrom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuentaFrom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClienteFrom().setVisible(true);
+                new CuentaFrom().setVisible(true);
             }
         });
     }
@@ -164,11 +180,7 @@ public class ClienteFrom extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtGmail;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables
 }
